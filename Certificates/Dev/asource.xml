@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type='text/xsl' href='Stylesheets/sourcestylesheet.xsl' ?>
+<snapshots>
+    <snapshot>
+        <edition>
+            <savepath>/home/paul/Certificates/1841BirthEllenBigwood_10.xml</savepath>
+            <editor>paul</editor>
+            <editdate>2009-06-14</editdate>
+        </edition>
+        <title>
+        </title>
+        <sources>
+            <source>firstsource</source>
+        </sources>
+        <images>
+            <image>
+                <title> first title</title>
+                <url>  </url>
+            </image>
+        </images>
+        <transcriptions>
+            <transcription>
+                <url> </url>
+            </transcription>
+        </transcriptions>
+        
+    </snapshot>
+</snapshots>

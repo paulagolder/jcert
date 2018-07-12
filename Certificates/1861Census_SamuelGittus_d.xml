@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type='text/xsl' href='Stylesheets/EngCensus1861_stylesheet.xsl' ?>
+
+<sourcedocument>
+  <savepath>/home/paul/Certificates/1861Census_SamuelGittus_d.xml</savepath>
+  <author>Paul Golder</author>
+  <editdate>2009-05-14</editdate>
+  <templateauthor>Paul A Golder</templateauthor>
+  <templateeditdate>25 march 2009</templateeditdate>
+  <templateID>Census1861-0.1</templateID>
+  <name>England Census 1861</name>
+  <period>1861</period>
+  <country>England</country>
+  <certificate>
+    <parish>St Austin</parish>
+    <certificate>
+      <ward>Claines</ward>
+      <borough>Worcester</borough>
+      <town>Worcester</town>
+    </certificate>
+    <certificate/>
+    <certificate/>
+    <certificate/>
+    <certificate>
+      <householdReference>129</householdReference>
+    </certificate>
+    <certificate/>
+    <certificate/>
+    <certificate/>
+    <certificate/>
+    <certificate/>
+    <certificate/>
+    <certificate/>
+    <certificate/>
+    <certificate/>
+    <certificate/>
+    <certificate/>
+    <certificate/>
+    <certificate/>
+    <certificate/>
+    <certificate/>
+  </certificate>
+</sourcedocument>
