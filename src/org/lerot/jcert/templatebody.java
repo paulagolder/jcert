@@ -18,6 +18,7 @@ public class templatebody extends vgroup
 	public templatebody(Element element)
 	{
 		super();
+		//System.out.println(" loading template " + this.myName+"="+this.getName());
 		this.initialise(null, element);
 	}
 
@@ -32,6 +33,10 @@ public class templatebody extends vgroup
 			for (jcertObject arow : cells) {
 				if (arow instanceof DisplayObject) {
 					if (arow.hasContent()) {
+						//if(arow instanceof tablegroup)
+						{
+							System.out.println("showing  " + arow.myName+"="+arow.getClass().getName());
+						}
 						JComponent rowpanel = ((DisplayObject) arow)
 								.getPanelObject(adoc, row);
 						((DisplayObject) arow).formatComponent(rowpanel);

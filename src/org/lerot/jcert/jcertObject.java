@@ -16,6 +16,7 @@ public abstract class jcertObject
 	protected int borderWidth = -1;
 	protected int cellborderWidth = -1;
 	protected int colspan = 1;
+	protected int columns = 10;
 	private jcertObject parent = null;
 	protected String direction = "horizontal";
 	protected String fontname = "SansSerif";
@@ -32,7 +33,7 @@ public abstract class jcertObject
 	private String objecttype=null;
 
 	protected int padding = 0;
-
+	protected int tgap = 1;
 	protected int rowspan = 1;
 	protected int rowcount;
 	protected String verticalAlign = null;
@@ -262,6 +263,7 @@ public abstract class jcertObject
 
 	public void loadAttributes(Element element)
 	{
+		//System.out.println(" loading " + this.myName+"="+this.getName());
 		List<Attribute> list = element.attributes();
 		for (Attribute attribute : list) {
 			String aname = attribute.getName();
@@ -273,8 +275,10 @@ public abstract class jcertObject
 				setObjecttype(attribute.getStringValue());
 			else if (aname.equals("width"))
 				myWidth = (Integer.parseInt(attribute.getStringValue()));
+			else if (aname.equals("columns"))
+				columns = (Integer.parseInt(attribute.getStringValue()));
 			else if (aname.equals("height"))
-				myHeight = ((Integer.parseInt(attribute.getStringValue())));
+				myHeight = (Integer.parseInt(attribute.getStringValue()));
 			else if (aname.equals("layout"))
 			{
 				layout = (attribute.getStringValue());
@@ -315,6 +319,8 @@ public abstract class jcertObject
 			} else if (aname.equals("interblockspacing"))
 				interblockspacing = (Integer.parseInt(attribute
 						.getStringValue()));
+			else if (aname.equals("tgap"))
+				tgap = Integer.parseInt(attribute.getStringValue());
 			else if (aname.equals("rows"))
 				rowcount = Integer.parseInt(attribute.getStringValue());
 			else if (!aname.equals("target"))

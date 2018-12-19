@@ -44,7 +44,7 @@ public class JCert_gui extends JFrame
 	static userpanel userframepanel;
 	public static String templatepath;
 	static Vector<documentTemplate> templates = new Vector<documentTemplate>();
-	private static final double version = 2.0;
+	private static final double version = 2.1;
 	public static String username;
 	public static String userdir,userhome;
 	public static user currentuser;
@@ -139,7 +139,7 @@ public class JCert_gui extends JFrame
 		} else if (os.equals("Linux"))
 		{
 			userhome = "/home/"+ username+"/";
-			certificatepath = userhome + "Certificates/";
+			certificatepath = userhome + "public_html/Certificates/";
 		}
 		else
 		{

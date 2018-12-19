@@ -23,7 +23,7 @@ public class tablegroup extends DisplayObject
 		List<Element> elist = element.elements();
 		for (Element element2 : elist) {
 			String ename = element2.getName();
-			if (ename.equals("hgroup")) {
+			if (ename.equals("hgroup") || ename.equals("trow")) {
 				hgroup newrow = new hgroup(this, element2);
 				if (newrow != null) {
 					cells.add(newrow);
@@ -40,6 +40,7 @@ public class tablegroup extends DisplayObject
 	@Override
 	public jcertPanel getPanelObject(Document adoc, int row)
 	{
+		System.out.println("showing  " + this.myName+"="+this.getClass().getName());
 		return getPanelObject(adoc);
 	}
 

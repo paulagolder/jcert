@@ -22,7 +22,7 @@ public class hgroup extends DisplayObject
 		loadAttributes(element);
 		if(this.getName().startsWith("tag"))
 		{
-			//System.out.println( " loading hgroup "+ this.getName());
+			System.out.println( " loading hgroup "+ this.getName());
 		}
 		
 		
@@ -41,11 +41,17 @@ public class hgroup extends DisplayObject
 				if (newrowgroup != null)
 					cells.add(newrowgroup);
 			}
+			if (ename.equals("tcell")) {
+				vgroup newrowgroup = new vgroup(this, element2);
+				if (newrowgroup != null)
+					cells.add(newrowgroup);
+			}
 			if (ename.equals("hgroup") ) {
 				hgroup newblockgroup = new hgroup(this, element2);
 				if (newblockgroup != null)
 					cells.add(newblockgroup);
 			}
+		
 			if (ename.equals("input")) {
 				InputCell anInput = new InputCell(this, element2);
 				cells.add(anInput);

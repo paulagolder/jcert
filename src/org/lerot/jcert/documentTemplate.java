@@ -23,7 +23,7 @@ public class documentTemplate
 	public static documentTemplate findTemplate(String templateid)
 	{
 		for (documentTemplate template : JCert_gui.templates) {
-			if (templateid.equals(template.getTemplateID())) {
+			if (template.getTemplateID().startsWith(templateid)) {
 				return template;
 			}
 		}
@@ -113,12 +113,11 @@ public class documentTemplate
 		templateAttributes = new HashMap<String, String>();
 		backgroundcolor = null;
 		template = null;
-		// System.out.println(
-		// " loading template attribute "+element.getName()+"="+element.getText());
+	
 		List<Element> list = element.elements();
 		for (Element element2 : list) {
 			String ename = element2.getName().toLowerCase();
-			//System.out.println( " Loading "+ename);
+		
 			if (ename.equals("template"))
 				loadTemplate(element2);		
 			else if (ename.equals("certificate")) {
@@ -161,6 +160,7 @@ public class documentTemplate
 		else if (ename.equals("source"))
 			setSource(element2.getText());
 		}
+		System.out.println(" loaded: " + getName());
 	}
 	
 	public String getAuthor()
