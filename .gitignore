@@ -13,6 +13,8 @@ bin/**
 tmp/**
 tmp/**/*
 lib/**
+Certificates/*
+xCertificates/*
 *.tmp
 *.bak
 *.swp
