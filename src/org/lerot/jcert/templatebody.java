@@ -35,7 +35,7 @@ public class templatebody extends vgroup
 					if (arow.hasContent()) {
 						//if(arow instanceof tablegroup)
 						{
-							System.out.println("showing  " + arow.myName+"="+arow.getClass().getName());
+							//System.out.println("showing  " + arow.myName+"="+arow.getClass().getName());
 						}
 						JComponent rowpanel = ((DisplayObject) arow)
 								.getPanelObject(adoc, row);

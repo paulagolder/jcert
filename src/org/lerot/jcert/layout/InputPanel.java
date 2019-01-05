@@ -5,9 +5,11 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
+import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
 import java.util.Vector;
 
 import javax.swing.AbstractAction;
@@ -19,6 +21,7 @@ import javax.swing.KeyStroke;
 
 import org.lerot.jcert.InputCell;
 import org.lerot.jcert.utils;
+import org.lerot.jcert.layout.jcertLayout.settings;
 
 public class InputPanel extends JTextPane implements FocusListener
 {
@@ -36,6 +39,7 @@ public class InputPanel extends JTextPane implements FocusListener
 	protected Font pFont;
 	protected Vector<String> text;
 	private int datarow;
+	private int minwidth=10;
 	InputCell cell;
 
 	public Action nextFocusAction = new AbstractAction("Move Focus Forwards") {
@@ -46,6 +50,63 @@ public class InputPanel extends JTextPane implements FocusListener
 		{
 			// System.out.println(" move forward"+((InputPanel)evt.getSource()).getText());
 			((Component) evt.getSource()).transferFocus();
+		}
+	};
+	protected static String savedtext;
+	
+	public Action copycontent = new AbstractAction("Copy Content") {
+		private static final long serialVersionUID = 1L;
+
+		@Override
+		public void actionPerformed(ActionEvent evt)
+		{
+			Component  comp = ((Component) evt.getSource());
+			if(comp instanceof JTextPane)
+			{
+				String text = ((JTextPane)comp).getText();
+				System.out.println ( " Cell contains "+text);
+				savedtext = text;
+				((Component) evt.getSource()).transferFocus();
+			}
+		
+		}
+	};
+	
+	public Action pastecontent = new AbstractAction("Paste Content") {
+		private static final long serialVersionUID = 1L;
+
+		@Override
+		public void actionPerformed(ActionEvent evt)
+		{
+			Component  comp = ((Component) evt.getSource());
+			if(comp instanceof JTextPane)
+			{
+				((JTextPane)comp).setText(savedtext);
+				System.out.println ( " Cell contains "+text);
+				((Component) evt.getSource()).transferFocus();
+			}
+		
+		}
+	};
+	
+	public Action copyabove = new AbstractAction("Copy Above Content") {
+		private static final long serialVersionUID = 1L;
+
+		@Override
+		public void actionPerformed(ActionEvent evt)
+		{
+			Component  comp = ((Component) evt.getSource());
+			if(comp instanceof JTextPane)
+			{
+				JTextPane jtp = ((JTextPane)comp);
+				InputPanel ipp = (InputPanel)jtp;
+				String cv = ipp.cell.getCellValue(datarow - 1);
+			
+				System.out.println ( " Cell contains "+cv);
+				((JTextPane)comp).setText(cv);
+				((Component) evt.getSource()).transferFocus();
+			}
+		
 		}
 	};
 
@@ -61,18 +122,22 @@ public class InputPanel extends JTextPane implements FocusListener
 	};
 
 	private int charwidth;
+	private int minWidth;
+	private int datacolumn;
 
-	public InputPanel(InputCell acell, int row, String tooltip)
+	public InputPanel(InputCell acell, int row,  String tooltip)
 	{
 		super();
 		cell = acell;
 		datarow = row;
+		
 		Color backgroundcolor = Color.decode("#E4DCDC");
 		setBackground(backgroundcolor);
 		setOpaque(true);
 		setForeground(Color.blue);
 		setBorder(utils.setborder(Color.GRAY, 1));
 		setEditable(true);
+		setMinWidth(acell.getMyWidth());
 		this.setToolTipText(tooltip);
 		this.addFocusListener(this);
 		pFont = new Font("SansSerif", Font.PLAIN, 10);
@@ -83,6 +148,32 @@ public class InputPanel extends JTextPane implements FocusListener
 		getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke("TAB"),
 				"helpAction");
 		this.getActionMap().put("helpAction", nextFocusAction);
+		
+		getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke('C',java.awt.event.InputEvent.ALT_MASK ),
+				"copycontent");
+		this.getActionMap().put("copycontent",copycontent);
+		
+		getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke('V',java.awt.event.InputEvent.ALT_MASK ),
+				"pastecontent");
+		this.getActionMap().put("pastecontent",pastecontent);
+		
+		getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke('D',java.awt.event.InputEvent.ALT_MASK ),
+				"copyabove");
+		this.getActionMap().put("copyabove",copyabove);
+		
+		if(acell.isTableCell())
+		{
+			TableLayout tlt = (TableLayout) (this.getParent().getParent()).getLayout();
+			settings mysettings = tlt.getSettings(this);
+		copyaction acopyaction = new copyaction(this, mysettings, "stuff", new Integer(KeyEvent.VK_D));
+		this.getActionMap().put("copyabove", acopyaction);
+		}
+		
+	}
+
+	private void setMinWidth(int myWidth) {
+		this.minWidth= myWidth;
+		
 	}
 
 	@Override
@@ -122,8 +213,39 @@ public class InputPanel extends JTextPane implements FocusListener
 		this.repaint();
 
 	}
+	
+	public Dimension getPreferredSize()
+	{
+	
+		Dimension d = super.getPreferredSize();
+		if(d.width < this.minWidth) 
+		{
+			d.width = this.getminWidth();
+		}
+		
+		return d ;
+	}
 
-	public void setMySize(Dimension d)
+	public Dimension getMinimumSize()
+	{
+		Dimension d = super.getMinimumSize();
+		if(d.width < this.minWidth) 
+		{
+			d.width = this.getminWidth();
+		}
+		
+		
+		return d ;
+	}
+
+	
+
+	private int getminWidth() {
+
+		return minWidth;
+	}
+
+	private void setMySize(Dimension d)
 	{
 		setTextSize();
 		int mincol = d.width / charwidth;
@@ -155,10 +277,15 @@ public class InputPanel extends JTextPane implements FocusListener
 		}
 		textheight = numberoflines * lineheight;
 		textwidth = maxlength;
+
 		if (columncount > 0)
 			charwidth = textwidth / columncount;
 		else
 			charwidth = fm.charWidth('M');
+		if(textwidth < minWidth) textwidth= minwidth;
 	}
+
+	
+	
 
 }

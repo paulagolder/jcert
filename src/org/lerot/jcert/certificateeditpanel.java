@@ -34,13 +34,11 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.Node;
-import org.dom4j.dom.DOMNodeHelper;
 import org.dom4j.io.DocumentResult;
 import org.dom4j.io.DocumentSource;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
-import org.dom4j.dom.DOMDocumentFactory;
 import org.lerot.jcert.layout.VerticalPanel;
 
 public class certificateeditpanel extends JPanel implements ActionListener,
@@ -112,9 +110,10 @@ public class certificateeditpanel extends JPanel implements ActionListener,
 			List nodeList = currentdocument.selectNodes(path);
 			Node anode = (Node) nodeList.get(rowno);
 			Element parent = anode.getParent();
-			List list = parent.content();
+			List list = parent.elements();
 			Element newElement = (Element) anode.clone();
 			list.add(rowno + 1, newElement);
+			
 			displaycert(currenttemplate, currentdocument);
 		}
 		if (command.startsWith("NEWBEFORE:")) {
@@ -128,7 +127,7 @@ public class certificateeditpanel extends JPanel implements ActionListener,
 			List nodeList = currentdocument.selectNodes(path);
 			Node anode = (Node) nodeList.get(rowno);
 			Element parent = anode.getParent();
-			List list = parent.content();
+			List list = parent.elements();
 			Element newElement = (Element) anode.clone();
 			list.add(rowno, newElement);
 			displaycert(currenttemplate, currentdocument);

@@ -10,11 +10,9 @@ import javax.swing.JOptionPane;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
-import org.dom4j.DocumentFactory;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.Node;
-import org.dom4j.ProcessingInstruction;
 import org.dom4j.io.SAXReader;
 
 public class documentTemplate
@@ -206,10 +204,12 @@ public class documentTemplate
 		}
 		JComponent apanel = template.getPanelObject(adoc);
 		// apanel.setBorder(utils.setborder("blue", 4));
+		apanel.setName(adoc.getName());
 		if (JCert_gui.showborders)
 			apanel.setBorder(utils.setborder("blue", 1));
 		return apanel;
 	}
+	
 	public void getCertificate(Element adoc)
 	{
 		if (adoc == null) {

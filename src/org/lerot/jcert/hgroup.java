@@ -125,7 +125,7 @@ public class hgroup extends DisplayObject
 		formatComponent(bgpanel);
 		if(this.getName().startsWith("tag"))
 		{
-			//System.out.println(" displaying hgroup  " + getName());
+			System.out.println(" displaying hgroup  " + getName());
 		}
 		if (JCert_gui.showborders)
 			bgpanel.setBorder(utils.setborder("yellow", 1));
@@ -139,10 +139,12 @@ public class hgroup extends DisplayObject
 					
 						if (agroup.hasContent()) {
 							JComponent apanel = ((DisplayObject)agroup).getPanelObject(adoc,row);
+							apanel.setName(agroup.getName());
 							((DisplayObject) agroup).formatComponent(apanel);
 							addwithLayout(bgpanel,"TALL", apanel,agroup);
 						} else {
 							jcertPanel apanel = new jcertPanel();
+							apanel.setName(agroup.getName());
 							((DisplayObject) agroup).formatComponent(apanel);
 							addwithLayout(bgpanel,"TALL", apanel,agroup);
 						}

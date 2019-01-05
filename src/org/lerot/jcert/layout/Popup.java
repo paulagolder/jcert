@@ -7,7 +7,11 @@ import org.lerot.jcert.PMenuItem;
 import org.lerot.jcert.certificateeditpanel;
 
 public class Popup  extends JPopupMenu {
-	    JMenuItem anItem1, anItem2, anItem3;
+	    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+		JMenuItem anItem1, anItem2, anItem3;
 	    
 	    
 	    public Popup(String tag,certificateeditpanel certificateframeloaderpanel){

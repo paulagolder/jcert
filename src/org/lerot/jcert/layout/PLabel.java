@@ -24,7 +24,7 @@ public abstract class PLabel extends JTextPane
     private int colspan=1;
     private int rowspan=1;
 	protected int verticalalignment = JLabel.CENTER;
-	
+	private int minWidth=1;
 
 	public abstract Dimension getTextDimension();
 
@@ -129,6 +129,12 @@ public abstract class PLabel extends JTextPane
 	public void setColspan(int colspan)
 	{
 		this.colspan = colspan;
+	}
+
+	public Dimension getMyMinimumSize() {
+		Dimension d=getMinimumSize(); // TODO Auto-generated method stub
+		if(d.width< minWidth) d.width = minWidth;
+		return d;
 	}
 	
 	

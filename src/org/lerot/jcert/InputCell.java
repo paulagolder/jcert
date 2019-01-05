@@ -34,11 +34,14 @@ public class InputCell extends TextDisplayObject
 		List<Attribute> list = element.attributes();
 		for (Attribute attribute : list) {
 			String name = attribute.getName();
-			if (name.equals("target")) {
+			if (name.equals("target"))
+			{
 				String celltarget = attribute.getStringValue();
-				if (celltarget != null && celltarget.length() > 0) {
+				if (celltarget != null && celltarget.length() > 0) 
+				{
 					StringTokenizer st = new StringTokenizer(celltarget, ":");
-					while (st.hasMoreTokens()) {
+					while (st.hasMoreTokens()) 
+					{
 						String token = st.nextToken();
 						targets.add(token);
 					}
@@ -93,7 +96,7 @@ public class InputCell extends TextDisplayObject
 		if (doc != null) {
 			List<Node> nodes = doc.selectNodes( objectpath);
 			if (rownumber < 0 || rownumber >= nodes.size()) {
-				System.out.println(" cellvalue 1 " + objectpath);
+				//System.out.println(" cellvalue 1 " + objectpath);
 				return "row " + rownumber;
 			}
 			Element element = (Element) nodes.get(rownumber);
@@ -190,7 +193,8 @@ public class InputCell extends TextDisplayObject
 	{
 		Dimension dim = getTextSize(row);
 		if (this.getMyWidth() < 1)
-			return dim.width;
+			//return dim.width;
+			return 100;
 		else
 			return this.getMyWidth();
 	}
@@ -211,6 +215,7 @@ public class InputCell extends TextDisplayObject
 	{
 		doc = adoc;
 		InputPanel alabel = new InputPanel(this, row, getTargets());
+	
 		formatComponent(alabel);
 		alabel.setText(getCellValue(doc, row));
 		return alabel;
@@ -341,6 +346,11 @@ public class InputCell extends TextDisplayObject
 			}
 		}
 
+	}
+
+	public boolean isTableCell() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 

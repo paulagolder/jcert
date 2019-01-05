@@ -69,7 +69,7 @@ public abstract class jcertLayout implements LayoutManager
 
 	}
 
-	Hashtable codeTable = new Hashtable();
+	static Hashtable codeTable = new Hashtable();
 
 	/**
 	 * Create a jcertLayout with a default vertical gap.
@@ -273,7 +273,7 @@ public abstract class jcertLayout implements LayoutManager
 		return j - i;
 	}
 
-	public settings getSettings(Component comp)
+	public  settings getSettings(Component comp)
 	{
 		settings s = (settings) codeTable.get(comp);
 		if (s == null)

@@ -30,7 +30,7 @@ public class HorizontalLayout extends jcertLayout
 		
 		if(parent.getName().startsWith("tag"))
 		{
-			// System.out.println(" in hlayout pw "+parent.getName());
+			System.out.println(" in hlayout pw "+parent.getName()+" "+parent.getClass().getName());
 		}
 		int rightcumwidth = 0, middlecumwidth = 0, leftcumwidth = 0;
 		int rightfillweight = 0, middlefillweight = 0, leftfillweight = 0;
@@ -40,7 +40,6 @@ public class HorizontalLayout extends jcertLayout
 		if (ncomponents == 0)
 			this.hgap = 0;
 		Insets insets = parent.getInsets();
-
 		Dimension parentSize = parent.getSize();
 		int usableWidth = parentSize.width - insets.left - insets.right;
 		int availableHeight = parentSize.height - insets.top - insets.bottom;
@@ -49,14 +48,39 @@ public class HorizontalLayout extends jcertLayout
 		// useMinimum=false;
 		if (ncomponents == 0) {
 			this.hgap = 0;
-			parent.setBounds(0, 0, parentSize.width, 5);
+			parent.setBounds(0, 0, parentSize.width, 50);//paul fix
 		} else {
-			for (int i = 0; i < ncomponents; i++) {
+			for (int i = 0; i < ncomponents; i++) 
+			{
 				Component comp = parent.getComponent(i);
+				Dimension d = null;
+				if(comp instanceof jcertPanel)
+				{
+					//System.out.println(" in hlayout : jcertpanel ");
+					 d = comp.getMinimumSize();
+				}else if (comp instanceof PLabel)
+				{				
+					d = ((PLabel)comp).getMinimumSize();
+					//System.out.println(" in hlayout : labelpanel "+d.width);
+				}else if (comp instanceof InputPanel)
+			    {				
+			    	//d = ((InputPanel)comp).getMinimumSize();
+			    	d= comp.getMinimumSize();
+			    	//System.out.println(" in hlayout : inputpanel "+d.width);
+			    }
+				else 
+				{		
+					System.out.println(" in hlayout : unknown panel "+comp.getClass().getName());
+				}	
+				
 				String compname = comp.getName();
+				if(comp.getName().startsWith("tag"))
+				{
+					System.out.println(" in hlayout pw2 "+comp.getName()+" "+comp.getClass().getName());
+				}
 				settings s = getSettings(comp);
 				if (comp.isVisible()) {
-					Dimension d = comp.getMinimumSize();
+					//Dimension d = comp.getMinimumSize();
 					int dwidth = d.width;
 					if (mode == Mode.LEFT) {
 						if (s.isTrue("MIDDLE")) {
@@ -92,7 +116,6 @@ public class HorizontalLayout extends jcertLayout
 							}
 						}
 					}
-
 				}
 			}
 			int xright = 0;

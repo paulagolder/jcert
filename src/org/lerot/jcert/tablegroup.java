@@ -40,7 +40,7 @@ public class tablegroup extends DisplayObject
 	@Override
 	public jcertPanel getPanelObject(Document adoc, int row)
 	{
-		System.out.println("showing  " + this.myName+"="+this.getClass().getName());
+		//System.out.println("showing  " + this.myName+"="+this.getClass().getName());
 		return getPanelObject(adoc);
 	}
 
@@ -98,7 +98,7 @@ public class tablegroup extends DisplayObject
 		setWidths();
 		TablePanel bgpanel = new TablePanel(nr, nc);
 		formatComponent(bgpanel);
-		System.out.println(" setting table " + getName());
+		//System.out.println(" setting table " + getName());
 	    int tablerow = 0;
 		for (jcertObject ahgroup : cells) {
 			if (ahgroup instanceof DisplayObject) {

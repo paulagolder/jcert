@@ -14,21 +14,9 @@ public class HorizontalPanel extends jcertPanel
 		setName(name);
 		lyt = new HorizontalLayout();
 		setLayout(lyt);
-		//setBorder(utils.setborder(Color.red,1));
 	}
 
-	/*public HorizontalPanel(String title, boolean titledborder)
-	{
-		// setAlignmentY(Component.TOP_ALIGNMENT);
-		setLayout(new HorizontalLayout());
-		// if(title.length()>0)
-		{
-			setName(title);
-			if (titledborder)
-				setBorder(setcborder(title));
-		}
-	}*/
-	
+
 	public Dimension getMinimumSize()
 	{
 		LayoutManager lm = this.getLayout();

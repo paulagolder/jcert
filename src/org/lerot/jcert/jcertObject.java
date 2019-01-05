@@ -2,7 +2,6 @@ package org.lerot.jcert;
 
 import java.awt.Font;
 import java.util.List;
-import java.util.Vector;
 
 import org.dom4j.Attribute;
 import org.dom4j.Element;
@@ -263,7 +262,7 @@ public abstract class jcertObject
 
 	public void loadAttributes(Element element)
 	{
-		//System.out.println(" loading " + this.myName+"="+this.getName());
+		
 		List<Attribute> list = element.attributes();
 		for (Attribute attribute : list) {
 			String aname = attribute.getName();

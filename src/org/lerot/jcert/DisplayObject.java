@@ -1,6 +1,5 @@
 package org.lerot.jcert;
 
-import java.awt.Component;
 import java.awt.Font;
 import java.util.Vector;
 

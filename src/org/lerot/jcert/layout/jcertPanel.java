@@ -1,7 +1,6 @@
 package org.lerot.jcert.layout;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.LayoutManager;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
@@ -14,11 +13,17 @@ public  class  jcertPanel extends JPanel implements  ComponentListener
 {
 	private static final long serialVersionUID = 1L;
 
-	private int setHeight = 0, setWidth = 0;
+	private int  minWidth = 100;
 	protected Color backgroundColor;
 	protected Color bordercolor = Color.green;
 	protected int borderwidth = 0;
 
+	public jcertPanel()
+	{
+		
+		setName("albert");
+	}
+	
 
 	public Border setcborder(String label)
 	{
